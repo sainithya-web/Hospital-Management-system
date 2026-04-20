@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Edit Patient Booking
+{% endblock title %}
+
+{% block body %}
+
+<div class="container d-flex flex-grow-1 align-items-center justify-content-center py-5">
+  <div class="row justify-content-center w-100">
+    <div class="col-lg-8">
+
+      <div class="card shadow-lg border-0 edit-card">
+
+        <div class="card-header text-center login-header py-4" style="background: #0f2a5f !important;">
+          <h3 class="mb-0 font-weight-bold text-white"><i class="fas fa-user-edit mr-2"></i>Modify Appointment</h3>
+          <p class="small text-light mt-2 mb-0">Updating records for Patient ID: #{{posts.pid}}</p>
+        </div>
+
+        <div class="card-body p-5">
+          <form action="/edit/{{posts.pid}}" method="post">
+            <div class="row">
+
+              <div class="col-md-6 border-right">
+                <h6 class="text-primary font-weight-bold mb-3">Identity Details</h6>
+                
+                <div class="form-group mb-4">
+                  <label class="font-weight-bold small text-secondary">EMAIL (Non-editable)</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text bg-light border-0"><i class="fas fa-lock text-muted"></i></span>
+                    </div>
+                    <input type="email" class="form-control bg-light border-0" 
+                           name="email" value="{{current_user.email}}" readonly>
+                  </div>
+                </div>
+
+                <div class="form-group mb-4">
+                  <label class="font-weight-bold small text-secondary">FULL NAME</label>
+                  <input type="text" class="form-control" name="name" value="{{posts.name}}" required>
+                </div>
+
+                <div class="form-group mb-4">
+                  <label class="font-weight-bold small text-secondary">PHONE NUMBER</label>
+                  <input type="number" class="form-control" name="number" value="{{posts.number}}" required>
+                </div>
+
+                <div class="form-group mb-4">
+                  <label class="font-weight-bold small text-secondary">GENDER</label>
+                  <select class="form-control" name="gender" required>
+                    <option selected>{{posts.gender}}</option>
+                    <option disabled>--- Change to ---</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Others</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <h6 class="text-primary font-weight-bold mb-3">Schedule & Clinical</h6>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group mb-4">
+                          <label class="font-weight-bold small text-secondary">SLOT</label>
+                          <select class="form-control" name="slot" required>
+                            <option selected>{{posts.slot}}</option>
+                            <option disabled>--- Change ---</option>
+                            <option>Morning</option>
+                            <option>Evening</option>
+                            <option>Night</option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mb-4">
+                          <label class="font-weight-bold small text-secondary">TIME</label>
+                          <input type="time" class="form-control" name="time" value="{{posts.time}}" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mb-4">
+                  <label class="font-weight-bold small text-secondary">DATE</label>
+                  <input type="date" class="form-control" name="date" value="{{posts.date}}" required>
+                </div>
+
+                <div class="form-group mb-4">
+                  <label class="font-weight-bold small text-secondary">DEPARTMENT</label>
+                  <input type="text" class="form-control" name="dept" value="{{posts.dept}}" required>
+                </div>
+
+                <div class="form-group mb-4">
+                  <label class="font-weight-bold small text-secondary">DISEASE/ISSUE</label>
+                  <input type="text" class="form-control" name="disease" value="{{posts.disease}}" required>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="d-flex gap-2 mt-4">
+                <button type="submit" class="btn btn-warning btn-block py-3 font-weight-bold shadow-sm text-dark">
+                    <i class="fas fa-save mr-2"></i> Save Changes
+                </button>
+            </div>
+            <div class="text-center mt-3">
+                <a href="/bookings" class="text-muted small"><i class="fas fa-times mr-1"></i> Cancel and go back</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

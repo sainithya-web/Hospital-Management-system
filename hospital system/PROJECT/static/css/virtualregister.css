@@ -1,0 +1,170 @@
+/* --- 1. THEME VARIABLES --- */
+:root {
+    --primary-dark: #0f2a5f;
+    --primary: #1e3a8a;
+    --accent: #2563eb;
+    --success: #28a745;
+    --bg: #f5f9fc;
+    --text-muted: #64748b;
+}
+
+/* --- 2. GLOBAL STYLES --- */
+body {
+    background-color: var(--bg);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #334155;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, .navbar-brand {
+    font-family: 'Itim', cursive;
+    color: var(--primary-dark);
+}
+
+/* --- 3. NAVBAR & FOOTER --- */
+.custom-navbar {
+    background: rgba(15, 42, 95, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.custom-footer {
+    background: var(--primary-dark);
+    color: white;
+    padding-top: 2rem;
+}
+
+.footer-line {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- 4. CARDS & SECTIONS --- */
+.card, .booking-card, .login-card, .edit-card, .doctor-card {
+    border: none;
+    border-radius: 15px;
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.login-header, .edit-header, .doctor-header, .booking-info {
+    background: var(--primary-dark);
+    color: white;
+    padding: 1.5rem;
+    font-weight: 600;
+}
+
+/* --- 5. FORMS & INPUTS --- */
+label {
+    color: var(--primary-dark);
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.form-group input, .form-control {
+    width: 100%; /* Responsive width */
+    max-width: 100%;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus, .form-control:focus {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1) !important;
+    outline: none;
+}
+
+/* Custom button style */
+.btn-primary, #btn {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover, #btn:hover {
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(15, 42, 95, 0.3);
+}
+
+/* --- 6. CAROUSEL & HERO (Text Fix) --- */
+.carousel-item img {
+    height: 85vh;
+    width: 100%;
+    object-fit: cover;
+    filter: brightness(55%); /* Slightly darker for better text contrast */
+    transition: transform 5s ease;
+}
+
+.carousel-caption {
+    bottom: 30%;
+    text-align: left;
+    z-index: 10;
+    color: #ffffff !important; /* Forces all caption text to white */
+}
+
+.slide-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #ffffff !important; 
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8); /* Stronger shadow for readability */
+    margin-bottom: 1rem;
+}
+
+.carousel-caption p {
+    font-size: 1.25rem;
+    color: #f8f9fa !important; /* Off-white for the description */
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    max-width: 600px;
+}
+
+/* Specific fix for the Hero section button */
+.hero-text .btn {
+    border: 2px solid #ffffff;
+    background: transparent;
+    color: #ffffff;
+}
+
+.hero-text .btn:hover {
+    background: #ffffff;
+    color: var(--primary-dark);
+}
+/* --- 7. SPECIAL LAYOUTS --- */
+.booking-page {
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.booking-card {
+    display: flex;
+    flex-direction: row; /* Desktop side-by-side */
+    width: 95%;
+    max-width: 1000px;
+}
+
+/* Responsive adjustment for Mobile */
+@media (max-width: 768px) {
+    .booking-card {
+        flex-direction: column;
+    }
+    .booking-info, .booking-form {
+        width: 100%;
+    }
+    .slide-title {
+        font-size: 2rem;
+    }
+}

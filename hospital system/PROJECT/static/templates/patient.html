@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Patients Booking
+{% endblock title %}
+
+{% block body %}
+
+<div class="container py-5">
+  <div class="row">
+
+    <div class="col-lg-4 mb-4">
+      <div class="card shadow-lg border-0 h-100">
+        <img src="{{ url_for('static', filename='d1.jpg') }}" class="card-img-top" style="height: 250px; object-fit: cover;">
+        <div class="card-body">
+          <h4 class="font-weight-bold text-primary">Medical Specialists</h4>
+          <p class="text-muted">Our experts are ready to assist you in various departments.</p>
+        </div>
+        <ul class="list-group list-group-flush border-0">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Cardiology <i class="fas fa-heartbeat text-danger"></i>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Neurology <i class="fas fa-brain text-info"></i>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Orthopedics <i class="fas fa-bone text-warning"></i>
+          </li>
+        </ul>
+        <div class="card-body bg-light text-center">
+          <a href="#" class="btn btn-sm btn-outline-primary mr-2">Contact Us</a>
+          <a href="#" class="btn btn-sm btn-outline-secondary">About Us</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="card shadow-lg border-0">
+        <div class="card-header text-center login-header py-4">
+          <h3 class="mb-0 font-weight-bold text-white"><i class="fas fa-calendar-check mr-2"></i>Book Appointment</h3>
+          <p class="small text-light mt-2 mb-0">Please fill in your details accurately</p>
+        </div>
+
+        <div class="card-body p-5">
+          <form action="/patients" method="post">
+            <div class="row">
+
+              <div class="col-md-6">
+                <div class="form-group mb-4">
+                  <label class="font-weight-bold small text-secondary">REGISTERED EMAIL</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text bg-light border-0"><i class="fas fa-envelope"></i></span>
+                    </div>
+                    <input type="email" class="form-control bg-light border-0" value="{{current_user.email}}" name="email" readonly>
+                  </div>
+                </div>
+
+                <div class="form-group mb-4">
+                  <label class="font-weight-bold small text-secondary">FULL NAME</label>
+                  <input type="text" class="form-control" name="name" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-group mb-4">
+                  <label class="font-weight-bold small text-secondary">PHONE NUMBER</label>
+                  <input type="number" class="form-control" name="number" placeholder="10-digit mobile" required>
+                </div>
+
+                <div class="form-group mb-4">
+                  <label class="font-weight-bold small text-secondary">GENDER</label>
+                  <select class="form-control" name="gender" required>
+                    <option disabled selected>Select...</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Others</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group mb-4">
+                          <label class="font-weight-bold small text-secondary">SLOT</label>
+                          <select class="form-control" name="slot" required>
+                            <option disabled selected>Select...</option>
+                            <option>Morning</option>
+                            <option>Evening</option>
+                            <option>Night</option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mb-4">
+                          <label class="font-weight-bold small text-secondary">TIME</label>
+                          <input type="time" class="form-control" name="time" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mb-4">
+                  <label class="font-weight-bold small text-secondary">DATE</label>
+                  <input type="date" class="form-control" name="date" required>
+                </div>
+
+                <div class="form-group mb-4">
+                  <label class="font-weight-bold small text-secondary">DEPARTMENT</label>
+                  <select class="form-control" name="dept" required>
+                    <option disabled selected>Select Specialists</option>
+                    {% for d in doct %}
+                    <option value="{{d.dept}}">{{d.dept}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+
+                <div class="form-group mb-4">
+                  <label class="font-weight-bold small text-secondary">DISEASE/ISSUE</label>
+                  <input type="text" class="form-control" name="disease" placeholder="Brief description" required>
+                </div>
+              </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block py-3 mt-4 shadow font-weight-bold">
+              <i class="fas fa-check-circle mr-2"></i> Confirm My Appointment
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock body %}

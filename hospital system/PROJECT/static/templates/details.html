@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Patient Directory
+{% endblock title %}
+
+{% block body %}
+
+<div class="container-fluid px-4 mt-5">
+
+  <div class="card shadow-lg border-0 overflow-hidden">
+    
+    <div class="card-header login-header d-flex justify-content-between align-items-center py-4">
+      <div>
+          <h3 class="mb-0 font-weight-bold text-white"><i class="fas fa-id-card-alt mr-2"></i>Patient Directory</h3>
+          <p class="small text-light mb-0 mt-1">Authorized Access: Master Patient Records</p>
+      </div>
+      <div class="d-none d-md-block">
+          <span class="badge badge-pill badge-light px-3 py-2 text-primary font-weight-bold">
+              Database Records: {{ query|length }}
+          </span>
+      </div>
+    </div>
+
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="bg-light text-secondary small font-weight-bold">
+            <tr>
+              <th class="border-0 px-4 py-3">SR. NO</th>
+              <th class="border-0">USERNAME</th>
+              <th class="border-0">EMAIL ADDRESS</th>
+              <th class="border-0 text-center">ROLE</th>
+              <th class="border-0 text-center">CONTACT</th>
+            </tr>
+          </thead>
+          <tbody class="small">
+            {% if query %}
+                {% for patient in query %}
+                <tr>
+                  <td class="px-4 font-weight-bold text-muted">{{loop.index}}</td>
+                  <td class="font-weight-bold text-dark">{{patient.username}}</td>
+                  <td class="text-muted">{{patient.email}}</td>
+                  <td class="text-center">
+                    <span class="badge badge-outline-secondary border px-2 py-1">{{patient.usertype}}</span>
+                  </td>
+                  <td class="text-center">
+                    <a href="mailto:{{patient.email}}" class="btn btn-sm btn-outline-primary shadow-sm">
+                        <i class="fas fa-envelope mr-1"></i> Send Mail
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="5" class="text-center py-5">
+                        <i class="fas fa-users-slash fa-3x text-light mb-3"></i>
+                        <h5 class="text-muted">No registered patients found.</h5>
+                    </td>
+                </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

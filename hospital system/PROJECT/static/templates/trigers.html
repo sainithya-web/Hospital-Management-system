@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Database Audit Logs
+{% endblock title %}
+
+{% block body %}
+
+<div class="container-fluid px-4 mt-5">
+
+  <div class="card shadow-lg border-0">
+    
+    <div class="card-header login-header d-flex justify-content-between align-items-center py-3">
+      <h5 class="mb-0 text-white">
+          <i class="fas fa-history mr-2"></i> Database Trigger Logs
+      </h5>
+      <span class="badge badge-light px-3 py-2 text-primary font-weight-bold">
+          <i class="fas fa-shield-alt mr-1"></i> System Audit Active
+      </span>
+    </div>
+
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead class="bg-light text-secondary small font-weight-bold">
+            <tr>
+              <th class="border-0 px-4">LOG ID</th>
+              <th class="border-0">PATIENT ID</th>
+              <th class="border-0">ACTION PERFORMED</th>
+              <th class="border-0">TIMESTAMP</th>
+            </tr>
+          </thead>
+          <tbody class="text-monospace small">
+            {% if query %}
+                {% for log in query %}
+                <tr>
+                  <td class="px-4 text-muted">#{{log.tid}}</td>
+                  <td class="font-weight-bold text-dark">PID-{{log.pid}}</td>
+                  <td>
+                    {% if log.action == 'INSERT' or log.action == 'Inserted' %}
+                        <span class="badge badge-success px-3 py-1"><i class="fas fa-plus-circle mr-1"></i> {{log.action}}</span>
+                    {% elif log.action == 'UPDATE' or log.action == 'Updated' %}
+                        <span class="badge badge-warning px-3 py-1"><i class="fas fa-edit mr-1"></i> {{log.action}}</span>
+                    {% elif log.action == 'DELETE' or log.action == 'Deleted' %}
+                        <span class="badge badge-danger px-3 py-1"><i class="fas fa-trash-alt mr-1"></i> {{log.action}}</span>
+                    {% else %}
+                        <span class="badge badge-secondary px-3 py-1">{{log.action}}</span>
+                    {% endif %}
+                  </td>
+                  <td class="text-primary font-weight-bold">
+                      <i class="far fa-clock mr-1"></i> {{log.timestamp}}
+                  </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4" class="text-center py-5">
+                        <i class="fas fa-search fa-3x text-light mb-3"></i>
+                        <h5 class="text-muted">No trigger logs recorded yet.</h5>
+                    </td>
+                </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <div class="card-footer bg-white py-3 border-0">
+        <p class="small text-muted mb-0">
+            <i class="fas fa-info-circle mr-1"></i> This log tracks all automated database triggers for patient record modifications.
+        </p>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}
